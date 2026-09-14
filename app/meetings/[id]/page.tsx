@@ -9,10 +9,8 @@ export default async function MeetingDetailPage({
 }) {
     const { id } = await params;
     const meetingId = Number(id);
-
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
     
-    const response = await fetch(`${baseUrl}/api/meetings/${meetingId}`, {
+    const response = await fetch(`http://localhost:3000/api/meetings/${meetingId}`, {
         cache: 'no-store',
     });
 
