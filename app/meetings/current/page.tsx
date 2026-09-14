@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import type { SacramentMeeting } from '../../../lib/types';
 
 export default async function CurrentMeetingPage() {
-    const response = await fetch(`http://localhost:3000/api/meetings`, {
+    const response = await fetch(`http://localhost:3000/app/api/meetings`, {
         cache: 'no-store',
     });
     const meetings: SacramentMeeting[] = await response.json();
