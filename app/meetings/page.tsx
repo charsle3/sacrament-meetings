@@ -3,7 +3,7 @@ import MeetingCard from '../../components/MeetingCard';
 
 export default async function Meetings() {
     const baseUrl = process.env.URL;
-    const response = await fetch(`${baseUrl}/api/meetings`, {
+    const response = await fetch(`https://sacrament-meetings-git-peer-code-review-suburbians.vercel.app//api/meetings`, {
         cache: 'no-store',
     });
 
