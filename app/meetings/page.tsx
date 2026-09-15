@@ -1,17 +1,20 @@
 import type { SacramentMeeting } from '../../lib/types.ts';
 import MeetingCard from '../../components/MeetingCard';
+import { getMeetings } from '../../lib/meetings-db';
 
 export default async function Meetings() {
-    const baseUrl = process.env.URL;
-    const response = await fetch(`https://sacrament-meetings-git-peer-code-review-suburbians.vercel.app/api/meetings`, {
-        cache: 'no-store',
-    });
+    // const baseUrl = process.env.URL || 'http://localhost:3000';
+    // const response = await fetch(`${baseUrl}/api/meetings`, {
+    //     cache: 'no-store',
+    // });
 
-    if (!response.ok) {
-        throw new Error('Failed to fetch meetings');
-    }
+    // if (!response.ok) {
+    //     throw new Error('Failed to fetch meetings');
+    // }
 
-    const meetings: SacramentMeeting[] = await response.json();
+    // const meetings: SacramentMeeting[] = await response.json();
+
+    const meetings: SacramentMeeting[] = getMeetings();
 
     return (
         <main className="max-w-4xl mx-auto px-4 py-12">
