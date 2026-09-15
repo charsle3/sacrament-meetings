@@ -10,7 +10,7 @@ export default async function MeetingDetailPage({
     const { id } = await params;
     const meetingId = Number(id);
     
-    const response = await fetch(`http://localhost:3000/app/api/meetings/${meetingId}`, {
+    const response = await fetch(`/api/meetings/${meetingId}`, {
         cache: 'no-store',
     });
 
