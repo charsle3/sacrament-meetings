@@ -2,10 +2,7 @@ import type { SacramentMeeting } from '../../lib/types.ts';
 import MeetingCard from '../../components/MeetingCard';
 
 export default async function Meetings() {
-
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL;
-
-    const response = await fetch(`${baseUrl}/api/meetings`, {
+    const response = await fetch(`http://localhost:3000/api/meetings`, {
         cache: 'no-store',
     });
 
