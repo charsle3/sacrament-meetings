@@ -14,7 +14,7 @@ export default async function Meetings() {
             throw new Error('Failed to fetch meetings');
         }
 
-        console.log('Response from API:', response);
+        console.log('Response from API:', response.json());
 
         const meetings: SacramentMeeting[] = await response.json();
     
