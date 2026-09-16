@@ -16,6 +16,10 @@ export default async function MeetingDetailPage({
         cache: 'no-store',
     });
 
+    if (!response.ok) {
+        throw new Error('Failed to fetch meetings');
+    }
+
     const meeting: SacramentMeeting = await response.json();
 
     // const meeting: SacramentMeeting | null = getMeetingById(meetingId);
