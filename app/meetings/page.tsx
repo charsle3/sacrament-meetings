@@ -5,50 +5,35 @@ import { getMeetings } from '../../lib/meetings-db';
 export default async function Meetings() {
     const baseUrl = process.env.URL || 'http://localhost:3000';
 
-    try {
-        const response = await fetch(`${baseUrl}/api/meetings`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json', // Tells the server you only want JSON
-            },
-            cache: 'no-store',
-        });
+    const response = await fetch(`${baseUrl}/api/meetings`, {
+        cache: 'no-store',
+    });
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch meetings');
-        }
-
-        const meetings: SacramentMeeting[] = await response.json();
-    
-
-    // const meetings: SacramentMeeting[] = getMeetings();
-
-        return (
-            <main className="max-w-4xl mx-auto px-4 py-12">
-                <h2 className="mb-4 pl-2 pt-2 text-3xl font-bold text-slate-900">
-                    Sacrament Meetings
-                </h2>
-                {meetings.length === 0 ? (
-                    <p className="text-slate-200">No meetings found.</p>
-                ) : (
-                    <ul className="space-y-4">
-                    {meetings.map((meeting) => (
-                        <li key={meeting.id} className="">
-                        <MeetingCard meeting={meeting} />
-                        </li>
-                    ))}
-                    </ul>
-                )}
-            </main>
-        );
-
-    } catch (error) {
-        console.error('Error fetching meetings:', error);
-        return (
-            <main className="max-w-4xl mx-auto px-4 py-12">
-                <p className="text-slate-900">Error fetching meetings.</p>
-            </main>
-        );
+    if (!response.ok) {
+        throw new Error('Failed to fetch meetings');
     }
+
+    const meetings: SacramentMeeting[] = await response.json();
+
+
+// const meetings: SacramentMeeting[] = getMeetings();
+
+    return (
+        <main className="max-w-4xl mx-auto px-4 py-12">
+            <h2 className="mb-4 pl-2 pt-2 text-3xl font-bold text-slate-900">
+                Sacrament Meetings
+            </h2>
+            {meetings.length === 0 ? (
+                <p className="text-slate-200">No meetings found.</p>
+            ) : (
+                <ul className="space-y-4">
+                {meetings.map((meeting) => (
+                    <li key={meeting.id} className="">
+                    <MeetingCard meeting={meeting} />
+                    </li>
+                ))}
+                </ul>
+            )}
+        </main>
+    );
 }
