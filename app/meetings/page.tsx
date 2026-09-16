@@ -4,9 +4,7 @@ import { getMeetings } from '../../lib/meetings-db';
 
 export default async function Meetings() {
     const baseUrl = process.env.URL || 'http://localhost:3000';
-    const response = await fetch(`${baseUrl}/api/meetings`, {
-        cache: 'no-store',
-    });
+    const response = await fetch(`${baseUrl}/api/meetings`);
 
     if (!response.ok) {
         throw new Error('Failed to fetch meetings');
