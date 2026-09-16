@@ -7,6 +7,11 @@ export default async function Meetings() {
 
     try {
         const response = await fetch(`${baseUrl}/api/meetings`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json', // Tells the server you only want JSON
+            },
             cache: 'no-store',
         });
 
