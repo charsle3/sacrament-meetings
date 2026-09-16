@@ -14,7 +14,7 @@ export default async function Meetings() {
             throw new Error('Failed to fetch meetings');
         }
 
-        const meetings: SacramentMeeting[] = JSON.parse(await response.text());
+        const meetings: SacramentMeeting[] = await response.json();
     
 
     // const meetings: SacramentMeeting[] = getMeetings();
