@@ -14,6 +14,8 @@ export default async function Meetings() {
             throw new Error('Failed to fetch meetings');
         }
 
+        console.log('Response from API:', response);
+
         const meetings: SacramentMeeting[] = await response.json();
     
 
@@ -37,12 +39,12 @@ export default async function Meetings() {
                 )}
             </main>
         );
-        
+
     } catch (error) {
         console.error('Error fetching meetings:', error);
         return (
             <main className="max-w-4xl mx-auto px-4 py-12">
-                <p className="text-slate-200">Error fetching meetings.</p>
+                <p className="text-slate-900">Error fetching meetings.</p>
             </main>
         );
     }
