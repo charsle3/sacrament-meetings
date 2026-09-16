@@ -3,13 +3,13 @@ import type { SacramentMeeting } from '../../../lib/types';
 import { getMeetings } from '../../../lib/meetings-db';
 
 export default async function CurrentMeetingPage() {
-    // const baseUrl = process.env.URL || 'http://localhost:3000';
-    // const response = await fetch(`${baseUrl}/api/meetings`, {
-    //     cache: 'no-store',
-    // });
-    // const meetings: SacramentMeeting[] = await response.json();
+    const baseUrl = process.env.URL || 'http://localhost:3000';
+    const response = await fetch(`${baseUrl}/api/meetings`, {
+        cache: 'no-store',
+    });
+    const meetings: SacramentMeeting[] = await response.json();
 
-    const meetings: SacramentMeeting[] = getMeetings();
+    // const meetings: SacramentMeeting[] = getMeetings();
 
     const today = new Date();
     const dayOfWeek = today.getDay(); // 0 (Sun) through 6 (Sat)

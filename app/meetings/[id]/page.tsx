@@ -11,14 +11,14 @@ export default async function MeetingDetailPage({
     const { id } = await params;
     const meetingId = Number(id);
     
-    // const baseUrl = process.env.URL || 'http://localhost:3000';
-    // const response = await fetch(`${baseUrl}/api/meetings/${meetingId}`, {
-    //     cache: 'no-store',
-    // });
+    const baseUrl = process.env.URL || 'http://localhost:3000';
+    const response = await fetch(`${baseUrl}/api/meetings/${meetingId}`, {
+        cache: 'no-store',
+    });
 
-    // const meeting: SacramentMeeting = await response.json();
+    const meeting: SacramentMeeting = await response.json();
 
-    const meeting: SacramentMeeting | null = getMeetingById(meetingId);
+    // const meeting: SacramentMeeting | null = getMeetingById(meetingId);
     
     if (!meeting) {
         redirect('/meetings');
