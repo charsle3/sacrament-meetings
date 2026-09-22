@@ -25,7 +25,7 @@ export default function Navlinks() {
                 className={[
                   'rounded-full border px-3 py-1.5 transition',
                   isActive
-                    ? 'border-sky-400 bg-sky-500 text-white shadow-sm'
+                    ? 'border-sky-400 bg-sky-500 text-black shadow-sm'
                     : 'border-slate-700 text-slate-200 hover:border-slate-500 hover:bg-slate-800 hover:text-white',
                 ].join(' ')}
               >

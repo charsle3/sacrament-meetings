@@ -1,32 +1,27 @@
-import type { SacramentMeeting } from '../../../lib/types.ts';
-import MeetingCard from '../../../components/MeetingCard';
+import { getMeetings, getMeetingsTotalPages } from '@/lib/meetings-db';
+import { MeetingSearch } from '@/components/MeetingSearch';
+import MeetingCard from '@/components/MeetingCard';
+import { Pagination } from '@/components/Pagination';
 
-export default async function Meetings() {
-    const baseUrl = process.env.URL || 'http://localhost:3000';
+export default async function MeetingsPage(props: {
+  searchParams?: Promise<{ query?: string; page?: string }>;
+}) {
+  const searchParams = await props.searchParams;
+  const query = searchParams?.query ?? '';
+  const currentPage = Number(searchParams?.page) || 1;
 
-    const response = await fetch(`${baseUrl}/api/meetings`, {
-        cache: 'no-store',
-    });
+  const [meetings, totalPages] = await Promise.all([
+    getMeetings(query, currentPage),
+    getMeetingsTotalPages(query),
+  ]);
 
-    if (!response.ok) {
-        throw new Error('Failed to fetch meetings');
-    }
-
-    const meetings: SacramentMeeting[] = await response.json();
-
-    return (
-        <main className="max-w-4xl mx-auto px-4 py-12">
-            {meetings.length === 0 ? (
-                <p className="text-slate-200">No meetings found.</p>
-            ) : (
-                <ul className="space-y-4">
-                {meetings.map((meeting) => (
-                    <li key={meeting.id} className="">
-                    <MeetingCard meeting={meeting} />
-                    </li>
-                ))}
-                </ul>
-            )}
-        </main>
-    );
+  return (
+    <div>
+      <MeetingSearch />
+      {meetings.map((m) => (
+        <MeetingCard key={m.id} meeting={m} />
+      ))}
+      <Pagination totalPages={totalPages} />
+    </div>
+  );
 }
