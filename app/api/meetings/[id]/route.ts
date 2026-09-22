@@ -9,7 +9,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
         return NextResponse.json({ error: 'Invalid id' }, { status: 400 });
     }
 
-    const meeting = getMeetingById(meetingId);
+    const meeting = await getMeetingById(meetingId);
     
     if (!meeting) {
         return NextResponse.json(

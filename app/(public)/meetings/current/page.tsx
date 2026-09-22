@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import type { SacramentMeeting } from '../../../lib/types';
+import type { SacramentMeeting } from '../../../../lib/types';
 
 export default async function CurrentMeetingPage() {
     const baseUrl = process.env.URL || 'http://localhost:3000';

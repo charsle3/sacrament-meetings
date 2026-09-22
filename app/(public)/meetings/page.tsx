@@ -1,5 +1,5 @@
-import type { SacramentMeeting } from '../../lib/types.ts';
-import MeetingCard from '../../components/MeetingCard';
+import type { SacramentMeeting } from '../../../lib/types.ts';
+import MeetingCard from '../../../components/MeetingCard';
 
 export default async function Meetings() {
     const baseUrl = process.env.URL || 'http://localhost:3000';
@@ -13,9 +13,6 @@ export default async function Meetings() {
     }
 
     const meetings: SacramentMeeting[] = await response.json();
-
-
-// const meetings: SacramentMeeting[] = getMeetings();
 
     return (
         <main className="max-w-4xl mx-auto px-4 py-12">

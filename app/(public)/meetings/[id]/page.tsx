@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import MeetingDetail from '../../../components/MeetingDetail';
+import MeetingDetail from '../../../../components/MeetingDetail';
 import { SacramentMeeting } from '@/lib/types';
 
 export default async function MeetingDetailPage({
@@ -20,8 +20,6 @@ export default async function MeetingDetailPage({
     }
 
     const meeting: SacramentMeeting = await response.json();
-
-    // const meeting: SacramentMeeting | null = getMeetingById(meetingId);
     
     if (!meeting) {
         redirect('/meetings');
