@@ -1,6 +1,5 @@
 import type { SacramentMeeting } from '../../lib/types.ts';
 import MeetingCard from '../../components/MeetingCard';
-import { getMeetings } from '../../lib/meetings-db';
 
 export default async function Meetings() {
     const baseUrl = process.env.URL || 'http://localhost:3000';
@@ -20,9 +19,6 @@ export default async function Meetings() {
 
     return (
         <main className="max-w-4xl mx-auto px-4 py-12">
-            <h2 className="mb-4 pl-2 pt-2 text-3xl font-bold text-slate-900">
-                Sacrament Meetings
-            </h2>
             {meetings.length === 0 ? (
                 <p className="text-slate-200">No meetings found.</p>
             ) : (

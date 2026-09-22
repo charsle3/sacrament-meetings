@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation';
 import MeetingDetail from '../../../components/MeetingDetail';
 import { SacramentMeeting } from '@/lib/types';
-import { getMeetingById } from '../../../lib/meetings-db';
 
 export default async function MeetingDetailPage({
   params,

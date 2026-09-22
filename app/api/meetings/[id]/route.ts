@@ -12,7 +12,9 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     const meeting = getMeetingById(meetingId);
     
     if (!meeting) {
-        return NextResponse.json(null);
+        return NextResponse.json(
+            { error: 'Meeting not found' }, { status: 404 }
+        );
     }
 
     return NextResponse.json(meeting);

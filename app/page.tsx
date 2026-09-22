@@ -39,7 +39,7 @@ export default function Home() {
             alt="Ward chapel"
             width={1200}
             height={900}
-            priority
+            fetchPriority="high"
             className="h-[420px] w-full object-cover md:h-[560px]"
           />
         </div>
