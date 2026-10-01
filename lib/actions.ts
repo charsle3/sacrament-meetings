@@ -179,9 +179,9 @@ export async function handleUpdateMeeting(id: number, prevState: State, formData
 export async function handleDeleteMeeting(id: number) {
     try {
       await deleteMeeting(id);
-      revalidatePath('/meetings');
-      redirect('/meetings');
     } catch (error) {
       console.error('Failed to delete meeting:', error);
     }
+    revalidatePath('/meetings');
+    redirect('/meetings');
 }
