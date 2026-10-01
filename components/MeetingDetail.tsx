@@ -1,4 +1,5 @@
 import type { SacramentMeeting } from '../lib/types';
+import { handleDeleteMeeting } from '../lib/actions';
 
 function formatDate(value: string) {
   const [year, month, day] = value.split('-').map(Number);
@@ -128,6 +129,18 @@ export default function MeetingDetail({ meeting }: { meeting: SacramentMeeting }
           <p className="mt-4 text-slate-600">No speakers listed.</p>
         )}
       </section>
+
+      <section className="mt-8 rounded-xl border border-slate-200 bg-white p-5 shadow-sm justify-center flex gap-4">
+        <a href={`/meetings/${meeting.id}/edit`} className="bg-blue-500 text-white px-4 py-2 rounded">
+          Update Meeting
+        </a>
+        <form action={handleDeleteMeeting.bind(null, meeting.id)}>
+          <button className="bg-red-500 text-white px-4 py-2 rounded">
+            Delete Meeting
+          </button>
+        </form>
+      </section>
+
     </article>
   );
 }
