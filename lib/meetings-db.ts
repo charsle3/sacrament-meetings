@@ -150,3 +150,10 @@ export async function deleteMeeting(id: number): Promise<boolean> {
   `;
   return result.length > 0;
 }
+
+export async function getUserByEmail(email: string) {
+  const result = await sql`
+    SELECT * FROM users WHERE email = ${email}
+  `;
+  return result[0] ?? null;
+}

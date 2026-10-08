@@ -7,6 +7,8 @@ const links = [
   { href: '/', label: 'Home' },
   { href: '/meetings', label: 'Meetings' },
   { href: '/meetings/current', label: 'Current Meeting' },
+  { href: '/login', label: 'Login' },
+  { href: '/admin', label: 'Admin' }
 ];
 
 export default function Navlinks() {

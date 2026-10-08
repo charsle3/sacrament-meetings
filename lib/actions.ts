@@ -5,6 +5,8 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { addMeeting, updateMeeting, deleteMeeting } from './meetings-db';
 import type { SacramentMeeting, Hymn, SpeakerItem, WardBusinessItem, MeetingType } from './types';
+import { signIn, auth } from '@/auth';
+import { AuthError } from 'next-auth';
 
 const meetingFormSchema = z.object({
   date: z.string().min(10, 'Date is required, YYYY-MM-DD Format'),
@@ -58,6 +60,8 @@ export type State = {
 
 
 export async function handleAddMeeting(prevState: State, formData: FormData): Promise<State> {
+  await requireOwnerSession();
+  
   const raw = {
     date: formData.get('date') as string,
     meetingType: formData.get('meetingType') as MeetingType,
@@ -117,6 +121,8 @@ export async function handleAddMeeting(prevState: State, formData: FormData): Pr
 }
 
 export async function handleUpdateMeeting(id: number, prevState: State, formData: FormData): Promise<State> {
+  await requireOwnerSession();
+
     const raw = {
     date: formData.get('date') as string,
     meetingType: formData.get('meetingType') as MeetingType,
@@ -177,11 +183,38 @@ export async function handleUpdateMeeting(id: number, prevState: State, formData
 }
 
 export async function handleDeleteMeeting(id: number) {
-    try {
-      await deleteMeeting(id);
-    } catch (error) {
-      console.error('Failed to delete meeting:', error);
+  await requireOwnerSession();
+
+  try {
+    await deleteMeeting(id);
+  } catch (error) {
+    console.error('Failed to delete meeting:', error);
+  }
+  revalidatePath('/meetings');
+  redirect('/meetings');
+}
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    await signIn('credentials', formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid email or password.';
+        default:
+          return 'Something went wrong.';
+      }
     }
-    revalidatePath('/meetings');
-    redirect('/meetings');
+    throw error; // re-throw so Next.js handles redirects correctly
+  }
+}
+
+async function requireOwnerSession() {
+  const session = await auth();
+  if (!session?.user) throw new Error('Not authenticated');
+  return session;
 }
