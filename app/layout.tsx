@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Student Name | Sacrament Meetings Planner',
+    default: 'James Kingsley | Sacrament Meetings Planner',
     template: '%s | Sacrament Meetings Planner',
   },
   description:
